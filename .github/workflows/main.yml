@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: check_Git_repo
+        run: sh files/checkGit.sh
       - name: Run Scan on IaC files in the repository
         uses: prisma-cloud-shiftleft/iac-scan-action@v1
         id: iac-scan
