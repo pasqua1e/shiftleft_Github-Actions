@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -k -u $PC_USER:$PC_PASS --output ./twistcli https://$PC_CONSOLE/api/v1/util/twistcli
+curl -k -u $TL_USER:$TL_PASS --output ./twistcli https://$TL_CONSOLE/api/v1/util/twistcli
 sudo chmod a+x ./twistcli
 try {
 		sh 'docker pull pasqu4le/evilpetclinic:latest'       
