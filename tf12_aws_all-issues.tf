@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "log_bucket" {
   acl = "log-delivery-write"
 }
 resource "aws_s3_bucket" "foo" {
-  // 23. AWS S3 buckets are accessible to public (high)
+  // 23. AWS S3 buckets are accessible to public (high) 
   // $.resource[*].aws_s3_bucket exists and ($.resource[*].aws_s3_bucket.*[*].*.acl anyEqual public-read-write or $.resource[*].aws_s3_bucket.*[*].*.acl anyEqual public-read)
   acl = "public-read-write"
 
