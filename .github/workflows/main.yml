@@ -10,6 +10,10 @@ jobs:
         uses: actions/checkout@v2
       - name: check_Git_repo
         run: sh ./files/checkGit.sh
+        env:
+          TL_USER: ${{ secrets.TL_USER }}
+          TL_PASS: ${{ secrets.TL_PASS }}
+          TL_CONSOLE: "https://console-master-pasq.prussiello.demo.twistlock.com"
       - name: Run Scan on IaC files in the repository
         uses: prisma-cloud-shiftleft/iac-scan-action@v1
         id: iac-scan
