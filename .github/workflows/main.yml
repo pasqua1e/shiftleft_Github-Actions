@@ -17,7 +17,10 @@ jobs:
    
       - name: Apply security policies (Policy-as-Code) for evilpetclinic
         run: bash ./files/addPolicies.sh
-        
+      
+      - name: Scan Image with twistcli
+        run: bash ./files/scanImage.sh
+
       - name: Run Scan on IaC files in the repository
         uses: prisma-cloud-shiftleft/iac-scan-action@v1
         id: iac-scan
