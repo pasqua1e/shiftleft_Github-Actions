@@ -18,7 +18,6 @@ curl -k \
   -d '{"name":"evilpetclinic","containers":["*"],"hosts":["*"],"images":["*evilpetclinic*"],"labels":["*"],"appIDs":["*"],"functions":["*"],"namespaces":["*"],"accountIDs":["*"],"codeRepos":["*"],"clusters":["*"],"color":"#68DCFC"}' \
   https://$TL_CONSOLE/api/v1/collections
 
-
 curl -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
