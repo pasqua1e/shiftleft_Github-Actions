@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: check_Git_repo
-        run: sh ./files/checkGit.sh
+        run: bash ./files/checkGit.sh
         env:
           TL_USER: ${{ secrets.TL_USER }}
           TL_PASS: ${{ secrets.TL_PASS }}
