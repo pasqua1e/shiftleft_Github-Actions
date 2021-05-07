@@ -7,6 +7,7 @@ REPOOUTPUT=$(curl -k -u $TL_USER:$TL_PASS \
 VULN=$(echo $REPOOUTPUT | sed -n -e 's/^.*\(vulnerabilitiesCount\)/\1/p' | cut -f1 -d, | cut -f2- -d:)
 #VULN=$(cat output.txt)
 echo "VULN is $VULN"
+
 if [[ "$VULN" == "0" ]] 
 then
    echo "No Code Repo Vulnerabilities!"
