@@ -5,15 +5,19 @@ jobs:
   prisma_cloud_iac_scan:
     runs-on: ubuntu-latest
     name: Run Prisma Cloud IaC Scan to check 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: check_Git_repo
-        run: bash ./files/checkGit.sh
-        env:
+    env:
           TL_USER: ${{ secrets.TL_USER }}
           TL_PASS: ${{ secrets.TL_PASS }}
           TL_CONSOLE: "https://console-master-pasq.prussiello.demo.twistlock.com"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check image Git dependencies has no vulnerabilities
+        run: bash ./files/checkGit.sh
+   
+      - name: Apply security policies (Policy-as-Code) for evilpetclinic
+        run: bash ./files/addPolicies.sh
+        
       - name: Run Scan on IaC files in the repository
         uses: prisma-cloud-shiftleft/iac-scan-action@v1
         id: iac-scan
