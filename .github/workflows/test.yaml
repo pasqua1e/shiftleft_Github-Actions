@@ -1,0 +1,16 @@
+name: Prisma Cloud IaC Scan Example
+on: [ pull_request ]
+
+jobs:
+  prisma_cloud_iac_scan:
+    runs-on: ubuntu-latest
+    name: Run Prisma Cloud IaC Scan to check 
+    env:
+          TL_USER: ${{ secrets.TL_USER }}
+          TL_PASS: ${{ secrets.TL_PASS }}
+          TL_CONSOLE: "console-master-pasq.prussiello.demo.twistlock.com"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      
