@@ -8,7 +8,7 @@ VULN=$(echo $REPOOUTPUT | sed -n -e 's/^.*\(vulnerabilitiesCount\)/\1/p' | cut -
 #VULN=$(cat output.txt)
 echo "VULN is $VULN"
 
-if [[ $VULN == "0" ]] 
+if [[ $VULN -eq 0 ]] 
 then
    echo "No Code Repo Vulnerabilities!"
    exit 0
