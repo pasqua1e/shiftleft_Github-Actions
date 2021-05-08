@@ -1,5 +1,5 @@
 name: Prisma Cloud IaC Scan Example
-on: [ pull_request ]
+on: [ push, pull_request ]
 
 jobs:
   prisma_cloud_iac_scan:
@@ -12,28 +12,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Check image Git dependencies has no vulnerabilities
-        run: bash ./files/checkGit.sh
-   
-      - name: Apply security policies (Policy-as-Code) for evilpetclinic
-        run: bash ./files/addPolicies.sh
-      
-      - name: Scan Image with twistcli
-        run: bash ./files/scanImage.sh
-
-      - name: Run Scan on IaC files in the repository
-        uses: prisma-cloud-shiftleft/iac-scan-action@v1
-        id: iac-scan
+      - name: test
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          prisma_api_url: 'https://api.prismacloud.io'
-          access_key: ${{ secrets.PRISMA_CLOUD_ACCESS_KEY }}
-          secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
-          asset_name: 'shiftleft-github-actions'
-          template_type: 'TF'
-          template_version: '0.13'
-      - name: Upload scan result artifact
-        uses: actions/upload-artifact@v2
-        if: success() || failure()
-        with:
-          name: iac_scan_result
-          path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
+          args: get pods
