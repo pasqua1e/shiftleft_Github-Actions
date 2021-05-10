@@ -29,8 +29,8 @@ jobs:
           access_key: ${{ secrets.PRISMA_CLOUD_ACCESS_KEY }}
           secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
           asset_name: 'shiftleft-github-actions'
-          template_type: 'TF'
-          template_version: '0.13'
+          template_type: 'K8S'
+
       - name: Upload scan result artifact
         uses: actions/upload-artifact@v2
         if: success() || failure()
