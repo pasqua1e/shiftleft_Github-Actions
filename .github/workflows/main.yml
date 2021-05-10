@@ -32,6 +32,7 @@ jobs:
           scan_path: ./files/
           use_scan_path_when_pr: true
           template_type: 'K8S'
+          failure_criteria: High:3,Medium:3,Low:10,Operator:or
 
       - name: Upload scan result artifact
         uses: actions/upload-artifact@v2
