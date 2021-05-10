@@ -25,7 +25,6 @@ curl -k \
   -d "$runtime_payload" \
   https://$TL_CONSOLE/api/v1/policies/runtime/container
 
-
 status=$?
 
 if [ $status -eq 0 ]
