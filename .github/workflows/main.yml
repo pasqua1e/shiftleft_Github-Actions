@@ -30,7 +30,6 @@ jobs:
           secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
           asset_name: 'shiftleft-github-actions'
           scan_path: ./files/
-          use_scan_path_when_pr: true
           template_type: 'K8S'
           failure_criteria: High:3,Medium:3,Low:10,Operator:or
 
