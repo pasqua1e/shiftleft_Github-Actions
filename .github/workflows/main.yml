@@ -30,6 +30,7 @@ jobs:
           secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
           asset_name: 'shiftleft-github-actions'
           scan_path: ./files/
+          use_scan_path_when_pr: true
           template_type: 'K8S'
 
       - name: Upload scan result artifact
