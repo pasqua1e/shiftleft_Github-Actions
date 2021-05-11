@@ -39,3 +39,8 @@ jobs:
         with:
           name: iac_scan_result
           path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        if: success() || failure()
+        with:
+          sarif_file: ${{ steps.iac-scan.outputs.iac_scan_result_sarif_path }}
