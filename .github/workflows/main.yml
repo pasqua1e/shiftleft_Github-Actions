@@ -25,7 +25,7 @@ jobs:
           asset_name: 'shiftleft-github-actions'
           template_type: 'K8S'
           failure_criteria: High:3,Medium:3,Low:10,Operator:or
-          scan_path: ./
+          scan_path: ./prismacloud_iac
           result_path: ./
 
       - name: Upload scan result artifact
