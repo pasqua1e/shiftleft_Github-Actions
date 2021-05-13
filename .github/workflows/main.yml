@@ -29,7 +29,7 @@ jobs:
           access_key: ${{ secrets.PRISMA_CLOUD_ACCESS_KEY }}
           secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
           asset_name: 'shiftleft-github-actions'
-          scan_path: ./files/
+          scan_path: files/
           template_type: 'K8S'
           failure_criteria: High:3,Medium:3,Low:10,Operator:or
 
@@ -48,7 +48,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: ./files/
+          directory: files/
           soft_fail: true # optional: do not return an error code if there are failed checks
           framework: kubernetes # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
           output_format: json # optional: the output format, one of: cli, json, junitxml, github_failed_only
