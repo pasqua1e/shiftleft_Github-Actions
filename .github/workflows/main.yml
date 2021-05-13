@@ -44,3 +44,12 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: ${{ steps.iac-scan.outputs.iac_scan_result_sarif_path }}
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ./files/
+          soft_fail: true # optional: do not return an error code if there are failed checks
+          framework: kubernetes # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
+          output_format: json # optional: the output format, one of: cli, json, junitxml, github_failed_only
+          log_level: DEBUG # optional: set log level. Default WARNING
