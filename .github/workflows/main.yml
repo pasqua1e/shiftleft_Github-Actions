@@ -15,7 +15,24 @@ jobs:
       - name: Check image Git dependencies has no vulnerabilities
         run: bash ./files/checkGit.sh
    
+      - name: Run Scan on IaC files in the repository
+        uses: prisma-cloud-shiftleft/iac-scan-action@v1
+        id: iac-scan
+        with:
+          prisma_api_url: 'https://api.prismacloud.io'
+          access_key: ${{ secrets.PRISMA_CLOUD_ACCESS_KEY }}
+          secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
+          asset_name: 'shiftleft-github-actions'
+          template_type: 'K8S'
+          failure_criteria: High:3,Medium:3,Low:10,Operator:or
+          result_path: ./
 
+      - name: Upload scan result artifact
+        uses: actions/upload-artifact@v2
+        if: success() || failure()
+        with:
+          name: iac_scan_result
+          path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
       
       
       - name: Run Checkov action
@@ -26,5 +43,5 @@ jobs:
           soft_fail: true # optional: do not return an error code if there are failed checks
           framework: kubernetes # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
           quiet: true
-          output_format: json # optional: the output format, one of: cli, json, junitxml, github_failed_only
-          log_level: DEBUG # optional: set log level. Default WARNING
+          output_format: github_failed_only # optional: the output format, one of: cli, json, junitxml, github_failed_only
+          log_level: WARNING # optional: set log level. Default WARNING
