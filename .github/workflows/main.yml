@@ -32,7 +32,7 @@ jobs:
         if: success() || failure()
         with:
           name: iac_scan_result
-          path: ./iac_scan_result
+          path: .
       
       - name: Run Checkov action
         id: checkov
