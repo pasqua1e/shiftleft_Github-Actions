@@ -1,5 +1,5 @@
 name: Prisma Cloud IaC Scan Example
-on: [ pull_request ]
+on: [ push,pull_request ]
 
 jobs:
   prisma_cloud_iac_scan:
