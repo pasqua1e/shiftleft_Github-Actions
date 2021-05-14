@@ -26,7 +26,7 @@ jobs:
           template_type: 'K8S'
           failure_criteria: High:3,Medium:3,Low:10,Operator:or
           scan_path: ./files
-          result_pat: iac_scan_results
+          result_path: iac_scan_results
 
       - name: Upload scan result artifact
         uses: actions/upload-artifact@v2
