@@ -25,8 +25,7 @@ jobs:
           asset_name: 'shiftleft-github-actions'
           template_type: 'K8S'
           failure_criteria: High:3,Medium:3,Low:10,Operator:or
-          scan_path: ./
-          result_path: ./prismacloud_iac
+          scan_path: ./files
 
       - name: Upload scan result artifact
         uses: actions/upload-artifact@v2
@@ -40,7 +39,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: ./
+          directory: ./files
           soft_fail: true # optional: do not return an error code if there are failed checks
           framework: kubernetes # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
           quiet: true
