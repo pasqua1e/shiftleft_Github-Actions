@@ -33,7 +33,7 @@ jobs:
         if: success() || failure()
         with:
           name: iac_scan_result
-          path: ${{ steps.iac-scan.outputs.iac-scan_result_path }}
+          path: ${{ steps.iac-scan.outputs.result_path }}
       
       
       - name: Run Checkov action
