@@ -33,8 +33,7 @@ jobs:
         if: success() || failure()
         with:
           name: iac_scan_result
-          path: ./prismacloud_iac
-          #path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
+          path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
       
       
       - name: Run Checkov action
