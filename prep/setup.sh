@@ -1,5 +1,5 @@
 #!/bin/bash
-repo="github.com/pasqua1e/shiftleft_Github-Actions/blob/main"
+repo="raw.githubusercontent.com/pasqua1e/shiftleft_Github-Actions/blob/main"
 
 pod=`kubectl get po -n dvwa|grep dvwa|cut -f1 -d" "`
 #Within dvwa:
