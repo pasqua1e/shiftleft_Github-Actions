@@ -36,7 +36,7 @@ jobs:
           scan_path: ./files    
       
       
-            - name: Upload scan result artifact
+      - name: Upload scan result artifact
         uses: actions/upload-artifact@v2
         if: success() || failure()
         with:
@@ -60,7 +60,6 @@ jobs:
         
       - name: Runtime attacks
         run: bash files/exec.sh runtime_attacks.sh
-        
-        
+          
       - name: WAAS attacks
         run: bash files/exec.sh waas_attacks.sh
