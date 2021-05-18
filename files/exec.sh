@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cmd="/var/www/html/$1"
-host="dvwa-$TL_CONSOLE"
+host=$(echo $TL_CONSOLE | sed -e "s/console/dvwa/")
 curl -v -u $TL_USER:$TL_PASS https://$host/login.php
 CSRF=$(curl -s -u $TL_USER:$TL_PASS -c dvwa.cookie "https://$host/login.php" | awk -F 'value=' '/user_token/ {print $2}' | cut -d "'" -f2)
 SESSIONID=$(grep PHPSESSID dvwa.cookie | awk -F '\t' '{print $7}')
