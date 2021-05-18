@@ -10,14 +10,57 @@ jobs:
           TL_PASS: ${{ secrets.TL_PASS }}
           TL_CONSOLE: "console-master-pasq.prussiello.demo.twistlock.com"
     steps:
+    
       - name: Checkout
         uses: actions/checkout@v2
         
+      - name: Check image Git dependencies has no vulnerabilities
+        run: bash ./files/checkGit.sh
+        
+      - name: Apply security policies (Policy-as-Code) for evilpetclinic
+        run: bash ./files/addPolicies.sh
+      
+      - name: Scan Image with twistcli
+        run: bash ./files/scanImage.sh
+   
+      - name: IaC scan of files in the repository
+        uses: prisma-cloud-shiftleft/iac-scan-action@v1
+        id: iac-scan
+        with:
+          prisma_api_url: 'https://api.prismacloud.io'
+          access_key: ${{ secrets.PRISMA_CLOUD_ACCESS_KEY }}
+          secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
+          asset_name: 'shiftleft-github-actions'
+          template_type: 'K8S'
+          failure_criteria: High:3,Medium:3,Low:10,Operator:or
+          scan_path: ./files    
       
       
+            - name: Upload scan result artifact
+        uses: actions/upload-artifact@v2
+        if: success() || failure()
+        with:
+          name: iac_scan_result
+          path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
+      
+      
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ./files
+          soft_fail: true # optional: do not return an error code if there are failed checks
+          framework: kubernetes # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
+          quiet: true
+          output_format: github_failed_only # optional: the output format, one of: cli, json, junitxml, github_failed_only
+          log_level: WARNING # optional: set log level. Default WARNING
+          
+      - name: Deploy evilpetclinic app
+        run: bash files/exec.sh deploy.sh
         
       - name: Runtime attacks
         run: bash files/exec.sh runtime_attacks.sh
         
-     # - name: WAAS attacks
-     #   run: bash files/exec.sh waas_attacks.sh
+        
+      - name: WAAS attacks
+        run: bash files/exec.sh waas_attacks.sh
