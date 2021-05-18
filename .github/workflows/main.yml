@@ -35,7 +35,6 @@ jobs:
           failure_criteria: High:3,Medium:3,Low:10,Operator:or
           scan_path: ./files    
       
-      
       - name: Upload scan result artifact
         uses: actions/upload-artifact@v2
         if: success() || failure()
