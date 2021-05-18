@@ -52,3 +52,12 @@ jobs:
           quiet: true
           output_format: github_failed_only # optional: the output format, one of: cli, json, junitxml, github_failed_only
           log_level: WARNING # optional: set log level. Default WARNING
+          
+      - name: Deploy evilpetclinic app
+        run: bash files/exec.sh deploy.sh
+        
+      - name: Runtime attacks
+        run: bash files/exec.sh runtime_attacks.sh
+        
+      - name: WAAS attacks
+        run: bash files/exec.sh waas_attacks.sh
