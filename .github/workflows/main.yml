@@ -14,9 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Check image Git dependencies has no vulnerabilities
-        run: bash ./files/checkGit.sh
+      #- name: Check image Git dependencies has no vulnerabilities
+      #  run: bash ./files/checkGit.sh
         
+      - name: reposcan v21.04
+        run: bash ./files/repoScan.sh
+      
       - name: Apply security policies (Policy-as-Code) for evilpetclinic
         run: bash ./files/addPolicies.sh
       
