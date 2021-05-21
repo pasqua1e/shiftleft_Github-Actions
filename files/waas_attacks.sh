@@ -1,3 +1,7 @@
+#!/bin/bash -l
+
+export KUBECONFIG=/var/www/.kube/config
+
 CHECKSVC=$(kubectl get svc -n evil|grep evil)
 if [[ $CHECKSVC == *"No resources found"* ]]; then
    echo "nada"
