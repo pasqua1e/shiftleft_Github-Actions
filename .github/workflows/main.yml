@@ -8,7 +8,7 @@ jobs:
     env:
           TL_USER: ${{ secrets.TL_USER }}
           TL_PASS: ${{ secrets.TL_PASS }}
-          TL_CONSOLE: "console-master-pasq.prussiello.demo.twistlock.com"
+          TL_CONSOLE: ${{ secrets.TL_CONSOLE }} 
     steps:
     
       - name: Checkout
