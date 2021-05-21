@@ -16,10 +16,15 @@ jobs:
         
       #- name: Check image Git dependencies has no vulnerabilities
       #  run: bash ./files/checkGit.sh
-        
-      - name: reposcan v21.04
+      - name: twistcli download
+        run: curl -k -u $TL_USER:$TL_PASS "https://$TL_CONSOLE/api/v1/util/twistcli" -v -o twistcli;chmod +x twistcli
+
+      - name: Repo scan 
         run: bash ./files/repoScan.sh
-      
+
+      - name: OSS License Check 
+        run: bash ./files/licenseCheck.sh
+
       - name: Apply security policies (Policy-as-Code) for evilpetclinic
         run: bash ./files/addPolicies.sh
       
