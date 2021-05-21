@@ -17,7 +17,7 @@ jobs:
       #- name: Check image Git dependencies has no vulnerabilities
       #  run: bash ./files/checkGit.sh
       - name: twistcli download
-        run: curl -k -u $TL_USER:$TL_PASS "https://$TL_CONSOLE/api/v1/util/twistcli" -v -o twistcli;chmod +x twistcli
+        run: curl -s -k -u $TL_USER:$TL_PASS "https://$TL_CONSOLE/api/v1/util/twistcli" -v -o twistcli;chmod +x twistcli
 
       - name: Repo scan 
         run: bash ./files/repoScan.sh
