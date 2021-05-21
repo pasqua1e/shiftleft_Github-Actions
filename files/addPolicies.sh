@@ -1,4 +1,4 @@
-version=$(curl -q -k -u $TL_USER:$TL_PASS -H 'Content-Type: application/json' -X GET https://$TL_CONSOLE/api/v1/version | sed -e 's/"//' |cut -d. -f1)
+version=$(curl -s -q -k -u $TL_USER:$TL_PASS -H 'Content-Type: application/json' -X GET https://$TL_CONSOLE/api/v1/version | sed -e 's/"//' |cut -d. -f1)
 
 if [ "$version" -lt 21 ]
 then
@@ -11,7 +11,7 @@ else
  waas_payload='{ "_id": "containerAppFirewall", "rules": [ { "applicationsSpec": [ { "appID": "1337", "banDurationMinutes": 5, "apiSpec": { "endpoints": [ { "host": "*", "internalPort": 8080, "basePath": "*" } ], "effect": "disable", "fallbackEffect": "disable", "paths": [] }, "botProtectionSpec": { "userDefinedBots": [], "knownBotProtectionsSpec": { "searchEngineCrawlers": "disable", "businessAnalytics": "disable", "educational": "disable", "news": "disable", "financial": "disable", "contentFeedClients": "disable", "archiving": "disable", "careerSearch": "disable", "mediaSearch": "disable" }, "unknownBotProtectionSpec": { "generic": "disable", "webAutomationTools": "disable", "webScrapers": "disable", "apiLibraries": "disable", "httpLibraries": "disable", "botImpersonation": "disable", "browserImpersonation": "disable", "requestAnomalies": { "effect": "disable", "threshold": 9 } }, "sessionValidation": "disable", "jsInjectionSpec": { "enabled": false, "timeoutEffect": "disable" } }, "dosConfig": { "effect": "disable", "matchCriteria": [], "matchConditions": [] }, "networkControls": { "advancedProtectionEffect": "prevent", "subnets": { "enabled": false, "allowMode": true, "allow": [], "fallbackEffect": "alert", "alert": null, "prevent": null, "blockingMode": "allowed" }, "countries": { "enabled": false, "allowMode": true, "allow": [], "fallbackEffect": "alert", "alert": null, "prevent": null, "blockingMode": "allowed" }, "exceptionSubnets": [] }, "xss": { "effect": "prevent", "exceptionFields": [] }, "sqli": { "effect": "prevent", "exceptionFields": [] }, "cmdi": { "effect": "prevent", "exceptionFields": [] }, "lfi": { "effect": "prevent", "exceptionFields": [] }, "codeInjection": { "effect": "prevent", "exceptionFields": [] }, "attackTools": { "effect": "prevent", "exceptionFields": [] }, "shellshock": { "effect": "prevent" }, "malformedReq": { "effect": "prevent" }, "headerSpecs": [], "csrfEnabled": true, "clickjackingEnabled": true, "intelGathering": { "infoLeakageEffect": "prevent", "removeFingerprintsEnabled": true }, "maliciousUpload": { "effect": "disable", "allowedFileTypes": [], "allowedExtensions": [] }, "body": { "skip": false, "inspectionSizeBytes": 131072 }, "certificate": {} } ], "collections": [ { "hosts": [ "*" ], "images": [ "*evilpetclinic*" ], "labels": [ "*" ], "containers": [ "*" ], "functions": [ "*" ], "namespaces": [ "*" ], "appIDs": [ "*" ], "accountIDs": [ "*" ], "codeRepos": [ "*" ], "clusters": [ "*" ], "name": "evilpetclinic", "owner": "prussiello_paloaltonetworks_com", "modified": "2021-01-20T09:55:41.982Z", "color": "#68DCFC", "system": false, "selected": true } ], "name": "Evil_WAAS_Rule", "owner": "prussiello_paloaltonetworks_com", "modified": "2021-01-20T10:11:29.411Z" }, { "modified": "2021-01-19T17:22:07.956Z", "owner": "prussiello_paloaltonetworks_com", "name": "demo_build - DVWA", "previousName": "", "collections": [ { "hosts": [ "*" ], "images": [ "vulnerables/web-dvwa:latest" ], "labels": [ "*" ], "containers": [ "*" ], "namespaces": [ "*" ], "accountIDs": [ "*" ], "clusters": [ "*" ], "name": "DVWA", "owner": "prussiello_paloaltonetworks_com", "modified": "2021-01-19T17:21:40.349Z", "color": "#033ea6", "description": "DVWA for WAAS Demo", "system": false } ], "applicationsSpec": [ { "appID": "1338", "banDurationMinutes": 5, "certificate": { "encrypted": "" }, "dosConfig": { "effect": "disable" }, "apiSpec": { "description": "DVWA", "endpoints": [ { "host": "*", "basePath": "*", "exposedPort": 0, "internalPort": 80, "tls": false, "http2": false } ], "effect": "disable", "fallbackEffect": "disable" }, "botProtectionSpec": { "userDefinedBots": [], "knownBotProtectionsSpec": { "searchEngineCrawlers": "alert", "businessAnalytics": "alert", "educational": "alert", "news": "alert", "financial": "alert", "contentFeedClients": "alert", "archiving": "alert", "careerSearch": "alert", "mediaSearch": "alert" }, "unknownBotProtectionSpec": { "generic": "alert", "webAutomationTools": "alert", "webScrapers": "alert", "apiLibraries": "alert", "httpLibraries": "alert", "botImpersonation": "alert", "browserImpersonation": "alert", "requestAnomalies": { "threshold": 9, "effect": "alert" } }, "sessionValidation": "disable", "interstitialPage": false, "jsInjectionSpec": { "enabled": false, "timeoutEffect": "disable" } }, "networkControls": { "advancedProtectionEffect": "alert", "subnets": { "enabled": false, "allowMode": true, "allow": [], "fallbackEffect": "alert", "alert": null, "prevent": null, "blockingMode": "allowed" }, "countries": { "enabled": false, "allowMode": true, "allow": [], "fallbackEffect": "alert", "alert": null, "prevent": null, "blockingMode": "allowed" }, "exceptionSubnets": [] }, "body": { "inspectionSizeBytes": 131072 }, "intelGathering": { "infoLeakageEffect": "disable", "removeFingerprintsEnabled": true }, "maliciousUpload": { "effect": "disable", "allowedFileTypes": [], "allowedExtensions": [] }, "csrfEnabled": true, "clickjackingEnabled": true, "sqli": { "effect": "alert", "exceptionFields": [] }, "xss": { "effect": "alert", "exceptionFields": [] }, "attackTools": { "effect": "alert", "exceptionFields": [] }, "shellshock": { "effect": "alert", "exceptionFields": [] }, "malformedReq": { "effect": "alert", "exceptionFields": [] }, "cmdi": { "effect": "alert", "exceptionFields": [] }, "lfi": { "effect": "alert", "exceptionFields": [] }, "codeInjection": { "effect": "alert", "exceptionFields": [] }, "remoteHostForwarding": {} } ] } ], "minPort": 30000, "maxPort": 31000 }'
 fi
 
-curl -k \
+curl -k -s \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -19,14 +19,14 @@ curl -k \
   https://$TL_CONSOLE/api/v1/collections
 
 #add customer malware signature
-curl -k \
+curl -s -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   -X PUT \
   -d '{"feed":[{"name":"evil","md5":"b927cd908b58e703ab86f484b44a3791","allowed":false}]}' \
   https://$TL_CONSOLE/api/v1/feeds/custom/malware
   
-curl -k \
+curl -s -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   -X PUT \
@@ -43,7 +43,7 @@ else
 fi
 
 
-curl -k \
+curl -s -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   -X PUT \
@@ -60,7 +60,7 @@ else
 fi
 
 
-curl -k \
+curl -s -k \
   -u $TL_USER:$TL_PASS \
   -H 'Content-Type: application/json' \
   -X PUT \
