@@ -13,14 +13,32 @@ kubectl exec -n dvwa $pod -- bash -c "curl -k https://$repo/files/exec.php -Lo /
 kubectl exec -n dvwa $pod -- bash -c "curl -k https://$repo/files/deploy.yml -Lo /var/www/html/deploy.yml"
 kubectl exec -n dvwa $pod -- bash -c "chown www-data:www-data /var/www/html/*;chmod +x /var/www/html/*.sh"
 
-#kubectl create sa -n dvwa dvwa
-#kubectl create clusterrole dvwa --verb=* --resource=*
-#kubectl create clusterrolebinding dvwa --serviceaccount=dvwa:dvwa --clusterrole=dvwa
-#kubectl exec -n dvwa -it $pod -- bash -c "mkdir /var/www/.kube;chown www-data:www-data /var/www/.kube"
-#kubectl cp ~/.kube/config dvwa/${pod}:/var/www/.kube
+kubectl create sa -n dvwa dvwa
+cat <<EOF | kubectl apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dvwa
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - '*'
+EOF
+kubectl create clusterrolebinding dvwa --serviceaccount=dvwa:dvwa --clusterrole=dvwa
+kubectl exec -n dvwa $pod -- bash -c "mkdir /var/www/.kube;chown www-data:www-data /var/www/.kube"
+kubectl cp ~/.kube/config dvwa/${pod}:/var/www/.kube
 
 #Delete dvwa deployment and create modified one:
-#kubectl get deploy dvwa-web -n dvwa -o yaml>dvwa-web.yaml
-#sed '/securityContext.*/a \ \ \ \ \ \ serviceAccount: dvwa' dvwa-web.yaml >dvwa-new.yaml
-#kubectl delete deploy dvwa-web -n dvwa
-#kubectl apply -f dvwa-new.yaml
+kubectl get deploy dvwa-web -n dvwa -o yaml>dvwa-web.yaml
+sed '/securityContext.*/a \ \ \ \ \ \ serviceAccount: dvwa' dvwa-web.yaml >dvwa-new.yaml
+kubectl delete deploy dvwa-web -n dvwa
+kubectl apply -f dvwa-new.yaml
