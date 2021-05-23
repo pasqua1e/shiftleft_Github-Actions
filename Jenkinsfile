@@ -1,3 +1,5 @@
+//this method doesn't work as it needs cross NS access from Jenkins - TODO check 
+
 node {
     
     stage('Clone repository') {
