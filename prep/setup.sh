@@ -15,6 +15,8 @@ kubectl exec -n dvwa -it $pod -- bash -c "chown www-data:www-data /var/www/html/
 kubectl create sa -n dvwa dvwa
 kubectl create clusterrole dvwa --verb=* --resource=*
 kubectl create clusterrolebinding dvwa --serviceaccount=dvwa:dvwa --clusterrole=dvwa
+kubectl exec -n dvwa -it $pod -- bash -c "mkdir /var/www/.kube;chown www-data:www-data /var/www/.kube"
+#kubectl cp ~/.kube/config dvwa/${pod}:/var/www
 
 #Delete dvwa deployment and create modified one:
 kubectl create deploy dvwa-sa --image=vulnerables/web-dvwa -n dvwa --dry-run -o yaml>dvwa.yaml
