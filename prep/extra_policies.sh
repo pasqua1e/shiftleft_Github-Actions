@@ -5,6 +5,10 @@
 #TL_PASS=corresponding password
 #TL_CONSOLE=PC console address
 
+#create evilpetclinic collection
+curl -k -u $TL_USER:$TL_PASS -H 'Content-Type: application/json' -X POST \
+  -d '{"name":"evilpetclinic","containers":["*"],"hosts":["*"],"images":["*evilpetclinic*"],"labels":["*"],"appIDs":["*"],"functions":["*"],"namespaces":["*"],"accountIDs":["*"],"codeRepos":["*"],"clusters":["*"],"color":"#68DCFC"}' \
+  https://$TL_CONSOLE/api/v1/collections
 
 #code repo vuln
 curl -k -u $TL_USER:$TL_PASS "https://$TL_CONSOLE/api/v1/policies/vulnerability/ci/images?project=Central+Console" \
