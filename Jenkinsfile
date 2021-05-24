@@ -7,12 +7,11 @@ node {
     }
 
     //initial setup
-    stage('Check image Git dependencies has no vulnerabilities') {
-        withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
-            sh('chmod +x prep/setup.sh && ./prep/setup.sh')
-        }
-        
-    }
+   // stage('Initial setup') {
+   //     withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
+  //          sh('chmod +x prep/setup.sh && ./prep/setup.sh')
+  //      }     
+  //  }
 
     //policy creation
     stage('Apply security policies (Policy-as-Code) for evilpetclinic') {
