@@ -14,7 +14,7 @@ node {
   //  }
 
     //policy creation
-    stage('Apply security policies (Policy-as-Code) for evilpetclinic') {
+    stage('Apply initial policies') {
         withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
             sh('chmod +x prep/extra_policies.sh && ./prep/extra_policies.sh')
         }
