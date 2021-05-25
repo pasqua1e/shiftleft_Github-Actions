@@ -19,7 +19,7 @@ jobs:
       - name: twistcli download
         run: curl -s -k -u $TL_USER:$TL_PASS "https://$TL_CONSOLE/api/v1/util/twistcli" -v -o twistcli;chmod +x twistcli
 
-      - name: Repo scan 
+      - name: Repo Vulnerability scan 
         run: bash ./files/repoScan.sh
 
       - name: OSS License Check 
