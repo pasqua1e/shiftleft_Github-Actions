@@ -50,7 +50,10 @@ jobs:
     #      name: iac_scan_result
     #      path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
       
-      
+      - name: Scan Image for Malware using Wildfire
+        run: bash ./files/malwareCheck.sh
+        
+        
       - name: Run Checkov action
         id: checkov
         uses: bridgecrewio/checkov-action@master
