@@ -6,7 +6,7 @@ node {
         checkout scm
     }
 
-    initial setup
+    //initial setup
     stage('Initial setup') {
         withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
             sh('chmod +x prep/setup.sh && ./prep/setup.sh')
