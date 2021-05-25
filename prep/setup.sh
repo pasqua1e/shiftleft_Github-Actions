@@ -89,7 +89,7 @@ sed "s/CHANGEME/$master/" dvwa-web.yaml >dvwa-new.yaml
 kubectl delete deploy dvwa-web -n dvwa
 kubectl apply -f dvwa-new.yaml
 
-sleep 5
+sleep 10
 pod=`kubectl get po -n dvwa|grep dvwa|cut -f1 -d" "`
 #Within dvwa:
 kubectl exec -n dvwa $pod -- bash -c "apt-get update;apt-get install curl -y"
