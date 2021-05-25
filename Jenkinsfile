@@ -19,5 +19,4 @@ node {
             sh('chmod +x prep/extra_policies.sh && ./prep/extra_policies.sh')
         }
     }
-
 }
