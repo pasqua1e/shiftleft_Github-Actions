@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-export KUBECONFIG=/var/www/.kube/config
+export KUBECONFIG=/var/www/html/kubeconfig
 
 PO=$(kubectl get po -n evil|grep evil| awk '{ print $1 }')
 

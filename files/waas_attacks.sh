@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-export KUBECONFIG=/var/www/.kube/config
+export KUBECONFIG=/var/www/html/kubeconfig
 
 CHECKSVC=$(kubectl get svc -n evil|grep evil)
 if [[ $CHECKSVC == *"No resources found"* ]]; then

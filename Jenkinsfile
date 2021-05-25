@@ -6,12 +6,12 @@ node {
         checkout scm
     }
 
-    //initial setup
-   // stage('Initial setup') {
-   //     withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
-  //          sh('chmod +x prep/setup.sh && ./prep/setup.sh')
-  //      }     
-  //  }
+    initial setup
+    stage('Initial setup') {
+        withCredentials([usernamePassword(credentialsId: 'twistlock_creds', passwordVariable: 'TL_PASS', usernameVariable: 'TL_USER')]) {
+            sh('chmod +x prep/setup.sh && ./prep/setup.sh')
+        }     
+    }
 
     //policy creation
     stage('Apply initial policies') {
