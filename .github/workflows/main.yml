@@ -8,7 +8,7 @@ jobs:
     env:
           TL_USER: ${{ secrets.TL_USER }}
           TL_PASS: ${{ secrets.TL_PASS }}
-          TL_CONSOLE: "https://console-master-pasq2.prussiello.demo.twistlock.com" 
+          TL_CONSOLE: ${{ secrets.TL_CONSOLE }} 
           IMAGE_NAME: "pasqu4le/evilpetclinic:latest"
     steps:
     
@@ -32,7 +32,7 @@ jobs:
       - name: Scan image for vulnerabilities 
         uses: PaloAltoNetworks/prisma-cloud-scan@v1
         with:
-          pcc_console_url: ${{ secrets.TL_CONSOLE }}
+          pcc_console_url: "https://console-master-pasq2.prussiello.demo.twistlock.com"
           pcc_user: ${{ secrets.TL_USER }}
           pcc_pass: ${{ secrets.TL_PASS }}
           image_name: ${{ env.IMAGE_NAME }}
