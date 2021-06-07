@@ -9,6 +9,7 @@ jobs:
           TL_USER: ${{ secrets.TL_USER }}
           TL_PASS: ${{ secrets.TL_PASS }}
           TL_CONSOLE: ${{ secrets.TL_CONSOLE }} 
+          IMAGE_NAME: "pasqu4le/evilpetclinic:latest"
     steps:
     
       - name: Checkout
@@ -28,31 +29,18 @@ jobs:
       - name: Apply security policies (Policy-as-Code) for evilpetclinic
         run: bash ./files/addPolicies.sh
       
-      - name: Scan Image for vulnerabilities
-        run: bash ./files/scanImage.sh
-   
-    #  - name: IaC scan of files in the repository
-    #    uses: prisma-cloud-shiftleft/iac-scan-action@v1
-    #    id: iac-scan
-    #    with:
-    #      prisma_api_url: 'https://api.prismacloud.io'
-    #      access_key: ${{ secrets.PRISMA_CLOUD_ACCESS_KEY }}
-    #      secret_key: ${{ secrets.PRISMA_CLOUD_SECRET_KEY }}
-    #      asset_name: 'shiftleft-github-actions'
-    #      template_type: 'K8S'
-    #      failure_criteria: High:3,Medium:3,Low:10,Operator:or
-    #      scan_path: ./files    
-      
-    #  - name: Upload scan result artifact
-    #    uses: actions/upload-artifact@v2
-    #    if: success() || failure()
-    #    with:
-    #      name: iac_scan_result
-    #      path: ${{ steps.iac-scan.outputs.iac_scan_result_path }}
+      - name: Scan image for vulnerabilities 
+        uses: PaloAltoNetworks/prisma-cloud-scan@v1
+        with:
+          pcc_console_url: ${{ secrets.TL_CONSOLE }}
+          pcc_user: ${{ secrets.TL_USER }}
+          pcc_pass: ${{ secrets.TL_PASS }}
+          image_name: ${{ env.IMAGE_NAME }}
+
       
       - name: Scan Image for Malware using Wildfire
         run: bash ./files/malwareCheck.sh
-        
+      
         
       - name: Run Checkov action
         id: checkov
