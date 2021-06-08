@@ -47,7 +47,6 @@
       <version>2.10.2</version>
     </dependency> -->
 
-	  
          <!-- remove  ^^^ for the demo -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
