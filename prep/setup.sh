@@ -90,6 +90,10 @@ kubectl delete deploy dvwa-web -n dvwa
 kubectl apply -f dvwa-new.yaml
 
 sleep 15
+
+kubectl delete -n evil svc evilpetclinic
+kubectl delete -n evil deploy evilpetclinic
+
 pod=`kubectl get po -n dvwa|grep dvwa|grep -i running|cut -f1 -d" "`
 #Within dvwa:
 kubectl exec -n dvwa $pod -- bash -c "apt-get update;apt-get install curl -y"
