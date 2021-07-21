@@ -9,7 +9,7 @@ jobs:
           TL_USER: ${{ secrets.TL_USER }}
           TL_PASS: ${{ secrets.TL_PASS }}
           TL_CONSOLE: ${{ secrets.TL_CONSOLE }} 
-          BYPASS_REPOSCAN: 1
+          BYPASS_REPOSCAN: 0
           BYPASS_OSS_LICENSE: 1
           BYPASS_IMAGESCAN: 0
           BYPASS_WF: 0
