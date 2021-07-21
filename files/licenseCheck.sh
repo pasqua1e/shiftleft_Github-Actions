@@ -4,7 +4,7 @@
 result=$(curl -k -u $TL_USER:$TL_PASS -H 'Content-Type: application/json' "https://$TL_CONSOLE/api/v1/coderepos-ci?limit=1&reverse=true&sort=scanTime"|jq '.[0].pass')
 
 
-if [ "$result" == "true" ]; then
+if [ "$result" == "true" ] || [ $BYPASS_OSS_LICENSE == 1 ]; then
    echo "License check passed!"
    exit 0
 else

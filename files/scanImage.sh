@@ -10,7 +10,7 @@ result=$(curl -k -u $TL_USER:$TL_PASS -H 'Content-Type: application/json' "https
 
 echo
 
-if [ -z "$result" ]; then
+if [ -z "$result" ] || [ $BYPASS_IMAGESCAN == 1 ]; then
    echo "Image Vulnerability scan passed!"
    exit 0
 else
