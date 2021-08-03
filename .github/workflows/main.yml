@@ -12,7 +12,7 @@ jobs:
           BYPASS_REPOSCAN: 1
           BYPASS_OSS_LICENSE: 1
           BYPASS_IMAGESCAN: 0
-          BYPASS_WF: 0
+          BYPASS_WF: 1
     steps:
     
       - name: Checkout
