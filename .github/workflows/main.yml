@@ -36,7 +36,6 @@ jobs:
         run: bash ./files/scanImage.sh
    
 
-   
     #  - name: IaC scan of files in the repository
     #    uses: prisma-cloud-shiftleft/iac-scan-action@v1
     #    id: iac-scan
