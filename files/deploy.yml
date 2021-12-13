@@ -5,6 +5,7 @@ metadata:
   labels:
     app: evilpetclinic
   name: evilpetclinic
+  
 spec:
   replicas: 1
   selector:

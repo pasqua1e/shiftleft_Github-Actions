@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         
-      #- name: Check image Git dependencies has no vulnerabilities
+      #- name: Check image Git dependencies has no vulnerabilities.
       #  run: bash ./files/checkGit.sh
       - name: twistcli download
         run: curl -s -k -u $TL_USER:$TL_PASS "https://$TL_CONSOLE/api/v1/util/twistcli" -v -o twistcli;chmod +x twistcli
