@@ -59,12 +59,13 @@ jobs:
         run: bash ./files/malwareCheck.sh
         
         
-      - name: Run Checkov action
-        id: checkov
+      - name: Run Bridgecrew action
+        id: Bridgecrew
         uses: bridgecrewio/checkov-action@master
         with:
           directory: ./files
           soft_fail: true # optional: do not return an error code if there are failed checks
+          api-key: ${{ secrets.BC_API_KEY }}
           framework: kubernetes # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
           quiet: true
           output_format: github_failed_only # optional: the output format, one of: cli, json, junitxml, github_failed_only
