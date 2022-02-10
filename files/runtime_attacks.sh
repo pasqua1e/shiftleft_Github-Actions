@@ -6,7 +6,7 @@ PO=$(kubectl get po -n evil|grep evil| awk '{ print $1 }')
 
 echo "DL bad evil file"
 kubectl exec $PO -n evil -- bash -c "curl https://cdn.twistlock.com/john/evil -o evil"
-kubectl exec $PO -n evil -it -- bash -c "curl https://wildfire.paloaltonetworks.com/publicapi/test/elf  -o WF-evil_$(date +%s)"
+kubectl exec $PO -n evil -- bash -c "curl https://wildfire.paloaltonetworks.com/publicapi/test/elf  -o WF-evil_$(date +%s)"
 
 
 echo "Kubernetes attack"
