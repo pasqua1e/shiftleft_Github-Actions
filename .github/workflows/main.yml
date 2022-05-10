@@ -11,7 +11,7 @@ jobs:
           TL_CONSOLE: ${{ secrets.TL_CONSOLE }} 
           BYPASS_REPOSCAN: 1
           BYPASS_OSS_LICENSE: 1
-          BYPASS_IMAGESCAN: 0
+          BYPASS_IMAGESCAN: 1
           BYPASS_WF: 1
     steps:
     
