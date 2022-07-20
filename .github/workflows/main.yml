@@ -47,10 +47,10 @@ jobs:
           directory: ./files
           #soft_fail: true # optional: do not return an error code if there are failed checks
           api-key: ${{ secrets.BC_API_KEY }}
-          framework: all
-          quiet: false
-          output_format: cli # optional: the output format, one of: cli, json, junitxml, github_failed_only
-          log_level: WARNING # optional: set log level. Default WARNING
+          #framework: all
+          #quiet: false
+          #output_format: cli # optional: the output format, one of: cli, json, junitxml, github_failed_only
+          #log_level: WARNING # optional: set log level. Default WARNING
           
       - name: Deploy evilpetclinic app
         run: bash files/exec.sh deploy.sh
