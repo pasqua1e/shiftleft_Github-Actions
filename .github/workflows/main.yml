@@ -63,3 +63,4 @@ jobs:
           
       - name: WAAS attacks
         run: bash files/exec.sh waas_attacks.sh
+        
