@@ -34,9 +34,7 @@ jobs:
       
       - name: Scan Image for vulnerabilities
         run: bash ./files/scanImage.sh
-   
 
-      
       - name: Scan Image for Malware using Wildfire
         run: bash ./files/malwareCheck.sh
         
@@ -63,4 +61,3 @@ jobs:
           
       - name: WAAS attacks
         run: bash files/exec.sh waas_attacks.sh
-        
