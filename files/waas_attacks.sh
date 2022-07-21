@@ -24,29 +24,29 @@ fi
 sleep 2
 
 echo "testing XSS attack"
-xff==$(printf %d.%d.%d.%d $((RANDOM%255+1)) $((RANDOM%256)){,,})
+xff==$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 curl -H "X-Forwarded-For: $xff" $SVC -d "<script>alert(1);</script>"
 
 echo "testing OS Command Injection attack"
-xff==$(printf %d.%d.%d.%d $((RANDOM%255+1)) $((RANDOM%256)){,,})
+xff==$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 curl -H "X-Forwarded-For: $xff" $SVC -H "X-Original-Uri: /?id=&%20echo%20aiwefwlguh%20&"
 
 echo "testing Code Injection attack"
-xff==$(printf %d.%d.%d.%d $((RANDOM%255+1)) $((RANDOM%256)){,,})
+xff==$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 curl -H "X-Forwarded-For: $xff" $SVC -d "?arg=1; phpinfo()"
 
 echo "testing Local File Inclusion"
-xff==$(printf %d.%d.%d.%d $((RANDOM%255+1)) $((RANDOM%256)){,,})
+xff==$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 curl -H "X-Forwarded-For: $xff" $SVC -d "8.8.8.8; cat /etc/passwd"
 
 echo "testing Shellshock Protection"
-xff==$(printf %d.%d.%d.%d $((RANDOM%255+1)) $((RANDOM%256)){,,})
+xff==$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 curl -H "X-Forwarded-For: $xff" $SVC --referer "() { :; }; ping -c 3 209.126.230.74"
 
 echo "testing Malformed HTTP Request attack"
-xff==$(printf %d.%d.%d.%d $((RANDOM%255+1)) $((RANDOM%256)){,,})
+xff==$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 curl -H "X-Forwarded-For: $xff" $SVC -d "echo 'hello'"
 
 echo "Testing DoS protection. (Remember to tweak the DoS settings...)"
-xff==$(printf %d.%d.%d.%d $((RANDOM%255+1)) $((RANDOM%256)){,,})
+xff==$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 for i in {1..51}; do curl -H "X-Forwarded-For: $xff" $SVC; done
