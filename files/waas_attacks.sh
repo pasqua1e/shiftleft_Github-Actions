@@ -21,8 +21,6 @@ else
    echo "Test exited WAAS protection with error code $status"
 fi
 
-sleep 2
-
 echo "testing XSS attack"
 xff=$(printf %d.%d.%d.%d $((RANDOM%223+1)) $((RANDOM%256)){,,})
 curl -H "X-Forwarded-For: $xff" $SVC -d "<script>alert(1);</script>"
