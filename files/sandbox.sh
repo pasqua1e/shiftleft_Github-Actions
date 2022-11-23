@@ -4,7 +4,7 @@
 #chmod a+x ./twistcli
  
 docker pull pasqu4le/crypto_nginx:latest     
-sudo ./twistcli sandbox -u $TL_USER --p $TL_PASS --address https://$TL_CONSOLE pasqu4le/evilpetclinic
+sudo ./twistcli sandbox -u $TL_USER --p $TL_PASS --address https://$TL_CONSOLE pasqu4le/crypto_nginx:latest
 echo
 
 if [ $BYPASS_SANDBOX == 1 ]; then
