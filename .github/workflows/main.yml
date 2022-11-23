@@ -32,6 +32,9 @@ jobs:
       - name: Apply security policies (Policy-as-Code) for evilpetclinic
         run: bash ./files/addPolicies.sh
       
+      - name: Image Sandbox analysis
+        run: sudo ./twistcli sandbox -u $TL_USER -p $TL_PASS --address "https://$TL_CONSOLE" pasqu4le/crypto_nginx:latest
+      
       - name: Scan Image for vulnerabilities
         run: bash ./files/scanImage.sh
 
