@@ -51,7 +51,7 @@ jobs:
           directory: ./files
           soft_fail: true # optional: do not return an error code if there are failed checks
           api-key: ${{ secrets.BC_API_KEY }}
-          framework: terraform
+          framework: all
           quiet: false
           output_format: cli # optional: the output format, one of: cli, json, junitxml, github_failed_only
           download_external_modules: true
