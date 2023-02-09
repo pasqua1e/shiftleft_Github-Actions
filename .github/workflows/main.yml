@@ -37,6 +37,8 @@ jobs:
         run: bash ./files/sandbox.sh
       
       - name: Scan Image for vulnerabilities
+        env:
+          JOB_NAME: github-actions
         run: bash ./files/scanImage.sh
 
       - name: Scan Image for Malware using Wildfire
