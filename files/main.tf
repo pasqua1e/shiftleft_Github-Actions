@@ -31,7 +31,7 @@ resource "aws_s3_bucket" "financials" {
   bucket        = "${local.resource_prefix.value}-financials"
   region        = "us-west-2"
   acl           = "private"
-  force_destroy = true
+  force_destroy = false
   tags = {
     Name        = "${local.resource_prefix.value}-financials"
     Environment = local.resource_prefix.value
