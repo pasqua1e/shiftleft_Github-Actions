@@ -10,17 +10,19 @@ resource "aws_s3_bucket" "data" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
+    yor_trace   = "89072d2f-3f72-41dd-9040-358fb7c29340"
   }
 }
 
 resource "aws_s3_bucket_object" "data_object" {
   bucket = aws_s3_bucket.data.id
-  region        = "us-west-2"
+  region = "us-west-2"
   key    = "customer-master.xlsx"
   source = "resources/customer-master.xlsx"
   tags = {
     Name        = "${local.resource_prefix.value}-customer-master"
     Environment = local.resource_prefix.value
+    yor_trace   = "54ec7e90-cc59-4349-b50c-955cf8dc91c1"
   }
 }
 
@@ -35,6 +37,7 @@ resource "aws_s3_bucket" "financials" {
   tags = {
     Name        = "${local.resource_prefix.value}-financials"
     Environment = local.resource_prefix.value
+    yor_trace   = "34af98d1-4c15-47ee-83f2-66716f4edd82"
   }
 
 }
@@ -43,7 +46,7 @@ resource "aws_s3_bucket" "operations" {
   # bucket is not encrypted
   # bucket does not have access logs
   bucket = "${local.resource_prefix.value}-operations"
-  region        = "us-west-2"
+  region = "us-west-2"
   acl    = "private"
   versioning {
     enabled = true
@@ -52,6 +55,7 @@ resource "aws_s3_bucket" "operations" {
   tags = {
     Name        = "${local.resource_prefix.value}-operations"
     Environment = local.resource_prefix.value
+    yor_trace   = "ad6955eb-183f-471b-9a91-f8c6ff454b58"
   }
 
 }
@@ -59,7 +63,7 @@ resource "aws_s3_bucket" "operations" {
 resource "aws_s3_bucket" "data_science" {
   # bucket is not encrypted
   bucket = "${local.resource_prefix.value}-data-science"
-  region        = "us-west-2"
+  region = "us-west-2"
   acl    = "private"
   versioning {
     enabled = true
@@ -69,6 +73,9 @@ resource "aws_s3_bucket" "data_science" {
     target_prefix = "log/"
   }
   force_destroy = true
+  tags = {
+    yor_trace = "14850f72-58b6-475a-9826-545d0492ed3f"
+  }
 }
 
 resource "aws_s3_bucket" "logs" {
@@ -90,5 +97,6 @@ resource "aws_s3_bucket" "logs" {
   tags = {
     Name        = "${local.resource_prefix.value}-logs"
     Environment = local.resource_prefix.value
+    yor_trace   = "b27430a3-e6d3-4029-8d78-6bd9df264af9"
   }
 }
